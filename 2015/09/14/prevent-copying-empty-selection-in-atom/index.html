@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Prevent copying empty selections in Atom | 1 Pixel Out</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternative" href="/atom.xml" title="1 Pixel Out" type="application/atom+xml">
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <header class="site-header">
+  <h1 class="site-header__title">
+    <a href="/">1 Pixel Out</a>
+  </h1>
+  
+  <nav class="site-header__nav">
+    
+      <a href="/">Home</a>
+    
+      <a href="/archives">Archives</a>
+    
+  </nav>
+  <nav class="site-header__tools">
+    
+      <a href="/atom.xml" title="RSS Feed">RSS Feed</a>
+    
+  </nav>
+</header>
+
+  <section><article itemscope itemprop="blogPost">
+  Published
+<a href="/2015/09/14/prevent-copying-empty-selection-in-atom/" class="article-date">
+  <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time>
+</a>
+
+  
+  
+  
+    <header>
+      
+  
+    <h1 class="article-title" itemprop="name">
+      Prevent copying empty selections in Atom
+    </h1>
+  
+
+    </header>
+  
+  <div itemprop="articleBody">
+    
+      <p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line. This is an easy mistake to make:</p>
+<ul>
+<li>cut something with <code>Cmd+X</code></li>
+<li>move the cursor to an empty line where I want to paste</li>
+<li>accidently hit <code>Cmd+C</code> instead of <code>Cmd+V</code></li>
+<li>Boom! I have now lost my clipboard contents</li>
+</ul>
+<p>Sublime Text had an option to disable copying empty selections but Atom doesn’t. Fortunately, it’s super easy to hack Atom and someone has figured out how to prevent this. I’m pasting it here so I can easily find it.</p>
+<p>This is <a href="https://discuss.atom.io/t/resolved-avoid-copying-when-selection-is-empty/16397/4" target="_blank" rel="external">the original post</a> on the Atom forum and here’s the snippet to paste in your Atom init script.</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prevent core:copy if and only if there's one selection in</span></span><br><span class="line"><span class="comment"># the active editor (mini or not) and its length equals 0</span></span><br><span class="line">atom.commands.add <span class="string">'atom-text-editor'</span>, <span class="string">'core:copy'</span>, <span class="function"><span class="params">(e)</span> -&gt;</span></span><br><span class="line">  editor = e.currentTarget.getModel()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># do nothing if there's more than 1 selection</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">if</span> editor.getSelectedBufferRanges().length &gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># get the starting and ending points of the selection</span></span><br><span class="line">  &#123;start, end&#125; = editor.getSelectedBufferRange()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># stop the command from immediate propagation (i.e.</span></span><br><span class="line">  <span class="comment"># executing the same command on the same element or</span></span><br><span class="line">  <span class="comment"># an element higher up the DOM tree). This works</span></span><br><span class="line">  <span class="comment"># because atom executes commands in the reverse order</span></span><br><span class="line">  <span class="comment"># they were registered with atom.commands.add, and this</span></span><br><span class="line">  <span class="comment"># one's added after the core commands are already</span></span><br><span class="line">  <span class="comment"># registered.</span></span><br><span class="line">  <span class="keyword">if</span> start.column <span class="keyword">is</span> end.column <span class="keyword">and</span> start.row <span class="keyword">is</span> end.row</span><br><span class="line">    e.stopImmediatePropagation()</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/atom/">atom</a></li></ul>
+
+  </footer>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/09/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+  <footer>
+  
+  &copy; 2015 Martin Laine<br>
+  Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+</footer>
+
+  
+</body>
+</html>

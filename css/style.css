@@ -1,0 +1,238 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic|Roboto+Mono:400,700,400italic";
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: #f5f4eb;
+}
+section {
+  margin: 0 auto;
+  padding: 40px 0;
+  max-width: 800px;
+  border-top: 4px solid #424242;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #424242;
+}
+pre,
+code {
+  font-family: "Roboto Mono";
+  font-weight: normal;
+  font-size: 14px;
+}
+h1 {
+  font-weight: normal;
+  font-size: 32px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-weight: bold;
+  font-size: 18px;
+}
+blockquote {
+  margin-left: 0;
+  padding: 5px 30px;
+  border-left: 1px dotted #a1a1a1;
+}
+blockquote p {
+  margin: 0;
+  font-style: italic;
+  color: #a1a1a1;
+}
+.site-header {
+  padding: 80px 20px;
+  text-align: center;
+}
+.site-header__title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0 10px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: #2b7ec5;
+  transition: all;
+}
+.site-header__title::before,
+.site-header__title::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background-color: inherit;
+  transition: all 0.2s;
+}
+.site-header__title::before {
+  width: 20%;
+  top: -1px;
+  bottom: -1px;
+  left: 0;
+}
+.site-header__title::after {
+  height: 60%;
+  top: 0;
+  left: -1px;
+  right: -1px;
+}
+.site-header__title:hover::before {
+  width: 100%;
+}
+.site-header__title:hover::after {
+  height: 100%;
+}
+.site-header__title a {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+}
+.site-header__nav {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.site-header__nav a {
+  text-decoration: none;
+}
+.site-header__nav a + a {
+  margin-left: 20px;
+}
+.site-header__tools {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+code {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  padding: 4px 5px;
+}
+pre code,
+.highlight {
+  display: block;
+  overflow-x: auto;
+  margin: 0;
+  padding: 10px;
+  background: #3f3f3f;
+  border-radius: 4px;
+  color: #dcdcdc;
+  -webkit-text-size-adjust: none;
+}
+.highlight {
+  padding: 0;
+}
+.highlight td {
+  padding: 10px;
+}
+.highlight pre {
+  margin: 0;
+}
+.highlight .gutter {
+  text-align: right;
+  opacity: 0.5;
+  border-right: 1px solid #6e6e6e;
+}
+.highlight .keyword,
+.highlight .tag,
+.highlight .css .class,
+.highlight .css .id,
+.highlight .lisp .title,
+.highlight .nginx .title,
+.highlight .request,
+.highlight .status,
+.highlight .clojure .attribute {
+  color: #e3ceab;
+}
+.highlight .django .template_tag,
+.highlight .django .variable,
+.highlight .django .filter .argument {
+  color: #dcdcdc;
+}
+.highlight .number,
+.highlight .date {
+  color: #8cd0d3;
+}
+.highlight .dos .envvar,
+.highlight .dos .stream,
+.highlight .variable,
+.highlight .apache .sqbracket,
+.highlight .name {
+  color: #efdcbc;
+}
+.highlight .dos .flow,
+.highlight .diff .change,
+.highlight .python .exception,
+.highlight .python .built_in,
+.highlight .literal,
+.highlight .tex .special {
+  color: #efefaf;
+}
+.highlight .diff .chunk,
+.highlight .subst {
+  color: #8f8f8f;
+}
+.highlight .dos .keyword,
+.highlight .decorator,
+.highlight .title,
+.highlight .type,
+.highlight .diff .header,
+.highlight .ruby .class .parent,
+.highlight .apache .tag,
+.highlight .nginx .built_in,
+.highlight .tex .command,
+.highlight .prompt {
+  color: #efef8f;
+}
+.highlight .dos .winutils,
+.highlight .ruby .symbol,
+.highlight .ruby .symbol .string,
+.highlight .ruby .string {
+  color: #dca3a3;
+}
+.highlight .diff .deletion,
+.highlight .string,
+.highlight .tag .value,
+.highlight .preprocessor,
+.highlight .pragma,
+.highlight .built_in,
+.highlight .smalltalk .class,
+.highlight .smalltalk .localvars,
+.highlight .smalltalk .array,
+.highlight .css .rule .value,
+.highlight .attr_selector,
+.highlight .pseudo,
+.highlight .apache .cbracket,
+.highlight .tex .formula,
+.highlight .coffeescript .attribute {
+  color: #cc9393;
+}
+.highlight .shebang,
+.highlight .diff .addition,
+.highlight .comment,
+.highlight .annotation,
+.highlight .pi,
+.highlight .doctype {
+  color: #7f9f7f;
+}
+.highlight .coffeescript .javascript,
+.highlight .javascript .xml,
+.highlight .tex .formula,
+.highlight .xml .javascript,
+.highlight .xml .vbscript,
+.highlight .xml .css,
+.highlight .xml .cdata {
+  opacity: 0.5;
+}
