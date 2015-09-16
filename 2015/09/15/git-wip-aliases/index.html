@@ -14,9 +14,11 @@
 
 <body>
   <header class="site-header">
-  <h1 class="site-header__title">
-    <a href="/">1 Pixel Out</a>
-  </h1>
+  
+    <div class="site-header__title">
+      <a href="/">1 Pixel Out</a>
+    </div>
+  
   
   <nav class="site-header__nav">
     
@@ -45,10 +47,15 @@
 
       <div class='article__meta'>
         <span class="article__date">
-  Published
+  <span class="u-mobile-hide">Published</span>
   <a href="/2015/09/15/git-wip-aliases/">
     <time datetime="2015-09-15T12:39:56.000Z" itemprop="datePublished">Sep 15th 2015</time>
   </a>
+</span>
+
+        <span class="article__author">
+  By
+  <strong itemprop="author">Martin Laine</strong>
 </span>
 
         
@@ -63,7 +70,7 @@
     </header>
   
   
-  <div itemprop="articleBody">
+  <div itemprop="articleBody" class="article__body">
     
       <p>Just so I can stop looking up how to set these, here are my git command aliases:</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[alias]</span></span><br><span class="line"><span class="setting">co = <span class="value">checkout</span></span></span><br><span class="line"><span class="setting">br = <span class="value">branch</span></span></span><br><span class="line"><span class="setting">ci = <span class="value">commit</span></span></span><br><span class="line"><span class="setting">st = <span class="value">status</span></span></span><br><span class="line"><span class="setting">unstage = <span class="value">reset HEAD --</span></span></span><br><span class="line"><span class="setting">fp = <span class="value"><span class="string">"!git fetch -p; git pull"</span></span></span></span><br><span class="line"><span class="setting">wip = <span class="value"><span class="string">"!git add --all; git ci -m WIP"</span></span></span></span><br><span class="line"><span class="setting">unwip = <span class="value"><span class="string">"!git reset --soft HEAD~1; git unstage"</span></span></span></span><br></pre></td></tr></table></figure>

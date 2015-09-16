@@ -14,9 +14,11 @@
 
 <body>
   <header class="site-header">
-  <h1 class="site-header__title">
-    <a href="/">1 Pixel Out</a>
-  </h1>
+  
+    <div class="site-header__title">
+      <a href="/">1 Pixel Out</a>
+    </div>
+  
   
   <nav class="site-header__nav">
     
@@ -45,10 +47,15 @@
 
       <div class='article__meta'>
         <span class="article__date">
-  Published
+  <span class="u-mobile-hide">Published</span>
   <a href="/2015/09/14/prevent-copying-empty-selection-in-atom/">
     <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time>
   </a>
+</span>
+
+        <span class="article__author">
+  By
+  <strong itemprop="author">Martin Laine</strong>
 </span>
 
         
@@ -63,7 +70,7 @@
     </header>
   
   
-  <div itemprop="articleBody">
+  <div itemprop="articleBody" class="article__body">
     
       <p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line. This is an easy mistake to make:</p>
 <ul>
