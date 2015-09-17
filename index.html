@@ -13,7 +13,8 @@
 </head>
 
 <body>
-  <header class="site-header">
+  <div class="site-wrapper">
+    <header class="site-header">
   
     <div class="site-header__title">
       <a href="/">1 Pixel Out</a>
@@ -34,9 +35,7 @@
   </nav>
 </header>
 
-  <section>
-  
-    <article itemscope itemprop="blogPost" class="article">
+    <section><article itemscope itemprop="blogPost" class="article">
   
     <header class="article__header">
       <h1 class="article__title" itemprop="name">
@@ -50,9 +49,7 @@
       <div class='article__meta'>
         <span class="article__date">
   <span class="u-mobile-hide">Published</span>
-  <a href="/2015/09/16/setting-and-reading-cookies-when-using-rack-test/">
-    <time datetime="2015-09-16T10:25:10.000Z" itemprop="datePublished">Sep 16th 2015</time>
-  </a>
+  <time datetime="2015-09-16T10:25:10.000Z" itemprop="datePublished">Sep 16th 2015</time>
 </span>
 
         <span class="article__author">
@@ -71,10 +68,8 @@
       </div>
     </header>
   
-  
   <div itemprop="articleBody" class="article__body">
-    
-      <p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
+    <p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
 <h2 id="To_set_a_cookie_with_an_expiry_date">To set a cookie with an expiry date</h2><p>For example, to set the expiry date 30 days in the future:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_cookie <span class="string">"name=value; expires=<span class="subst">#&#123;<span class="constant">Time</span>.now + <span class="number">30</span>.days&#125;</span>"</span></span><br></pre></td></tr></table></figure>
 <h2 id="To_check_expiry_date_of_a_cookie_set_by_the_response">To check expiry date of a cookie set by the response</h2><p>Cookies are set by the response’s <code>Set-Cookie</code> header. To check the <code>expires</code> option, we need to parse the header and create <code>Cookie</code> objects:</p>
@@ -83,7 +78,6 @@
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cookie = cookies_from_response[<span class="string">"cookie_name"</span>]</span><br><span class="line">expect(cookie.expires).to be_within(<span class="number">5</span>.minutes).of(<span class="number">30</span>.days.from_now)</span><br></pre></td></tr></table></figure>
 <p>The <code>be_within</code> matcher is perfect her because we cannot check the exact expiry date.</p>
 
-    
   </div>
   
   
@@ -91,125 +85,26 @@
 
 
 
-  
-    <article itemscope itemprop="blogPost" class="article">
-  
-    <header class="article__header">
-      <h1 class="article__title" itemprop="name">
-  
-    
-      <a href="/2015/09/15/git-wip-aliases/">Git WIP aliases</a>
-    
-  
-</h1>
-
-      <div class='article__meta'>
-        <span class="article__date">
-  <span class="u-mobile-hide">Published</span>
-  <a href="/2015/09/15/git-wip-aliases/">
-    <time datetime="2015-09-15T12:39:56.000Z" itemprop="datePublished">Sep 15th 2015</time>
-  </a>
-</span>
-
-        <span class="article__author">
-  By
-  <strong itemprop="author">Martin Laine</strong>
-</span>
-
-        
-        
-  <span class="article__tags">
-    Tagged as:
-    <a class="tag-link" href="/tags/git/">git</a>
-  </span>
 
 
-      </div>
-    </header>
-  
-  
-  <div itemprop="articleBody" class="article__body">
-    
-      <p>Just so I can stop looking up how to set these, here are my git command aliases:</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[alias]</span></span><br><span class="line"><span class="setting">co = <span class="value">checkout</span></span></span><br><span class="line"><span class="setting">br = <span class="value">branch</span></span></span><br><span class="line"><span class="setting">ci = <span class="value">commit</span></span></span><br><span class="line"><span class="setting">st = <span class="value">status</span></span></span><br><span class="line"><span class="setting">unstage = <span class="value">reset HEAD --</span></span></span><br><span class="line"><span class="setting">fp = <span class="value"><span class="string">"!git fetch -p; git pull"</span></span></span></span><br><span class="line"><span class="setting">wip = <span class="value"><span class="string">"!git add --all; git ci -m WIP"</span></span></span></span><br><span class="line"><span class="setting">unwip = <span class="value"><span class="string">"!git reset --soft HEAD~1; git unstage"</span></span></span></span><br></pre></td></tr></table></figure>
-<p><code>git wip</code> stages all current changes and commits them. Not sure why I prefer it to <code>git stash</code>.</p>
-<p><code>git unwip</code> obviously undoes a <code>git wip</code>.</p>
-
-    
-  </div>
-  
-  
-</article>
-
-
-
-  
-    <article itemscope itemprop="blogPost" class="article">
-  
-    <header class="article__header">
-      <h1 class="article__title" itemprop="name">
-  
-    
-      <a href="/2015/09/14/prevent-copying-empty-selection-in-atom/">Prevent copying empty selections in Atom</a>
-    
-  
-</h1>
-
-      <div class='article__meta'>
-        <span class="article__date">
-  <span class="u-mobile-hide">Published</span>
-  <a href="/2015/09/14/prevent-copying-empty-selection-in-atom/">
-    <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time>
-  </a>
-</span>
-
-        <span class="article__author">
-  By
-  <strong itemprop="author">Martin Laine</strong>
-</span>
-
-        
-        
-  <span class="article__tags">
-    Tagged as:
-    <a class="tag-link" href="/tags/atom/">atom</a>
-  </span>
-
-
-      </div>
-    </header>
-  
-  
-  <div itemprop="articleBody" class="article__body">
-    
-      <p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line. This is an easy mistake to make:</p>
-<ul>
-<li>cut something with <code>Cmd+X</code></li>
-<li>move the cursor to an empty line where I want to paste</li>
-<li>accidently hit <code>Cmd+C</code> instead of <code>Cmd+V</code></li>
-<li>Boom! I have now lost my clipboard contents</li>
-</ul>
-<p>Sublime Text had an option to disable copying empty selections but Atom doesn’t. Fortunately, it’s super easy to hack Atom and someone has figured out how to prevent this. I’m pasting it here so I can easily find it.</p>
-<p>This is <a href="https://discuss.atom.io/t/resolved-avoid-copying-when-selection-is-empty/16397/4" target="_blank" rel="external">the original post</a> on the Atom forum and here’s the snippet to paste in your Atom init script.</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prevent core:copy if and only if there's one selection in</span></span><br><span class="line"><span class="comment"># the active editor (mini or not) and its length equals 0</span></span><br><span class="line">atom.commands.add <span class="string">'atom-text-editor'</span>, <span class="string">'core:copy'</span>, <span class="function"><span class="params">(e)</span> -&gt;</span></span><br><span class="line">  editor = e.currentTarget.getModel()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># do nothing if there's more than 1 selection</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">if</span> editor.getSelectedBufferRanges().length &gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># get the starting and ending points of the selection</span></span><br><span class="line">  &#123;start, end&#125; = editor.getSelectedBufferRange()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># stop the command from immediate propagation (i.e.</span></span><br><span class="line">  <span class="comment"># executing the same command on the same element or</span></span><br><span class="line">  <span class="comment"># an element higher up the DOM tree). This works</span></span><br><span class="line">  <span class="comment"># because atom executes commands in the reverse order</span></span><br><span class="line">  <span class="comment"># they were registered with atom.commands.add, and this</span></span><br><span class="line">  <span class="comment"># one's added after the core commands are already</span></span><br><span class="line">  <span class="comment"># registered.</span></span><br><span class="line">  <span class="keyword">if</span> start.column <span class="keyword">is</span> end.column <span class="keyword">and</span> start.row <span class="keyword">is</span> end.row</span><br><span class="line">    e.stopImmediatePropagation()</span><br></pre></td></tr></table></figure>
-    
-  </div>
-  
-  
-</article>
-
-
-
-  
-  
-
+<nav>
+  <a href="/archives">Browse posts</a>
+</nav>
 
 </section>
+  </div>
   <footer class="site-footer">
-  
-  &copy; 2015 Martin Laine<br>
-  Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> - 
-  Theme inspired by <a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
+  <span class="site-footer__line">
+    &copy; 2015 Martin Laine
+  </span>
+  <span class="site-footer__line">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    and <a href="https:/github.com/" target="_blank">GitHub</a>
+  </span>
+  <span class="site-footer__line">
+    Theme inspired by <a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
+    from <a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a>
+  </span>
 </footer>
 
   
