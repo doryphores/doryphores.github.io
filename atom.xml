@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1pixelout.net/"/>
-  <updated>2015-09-17T20:02:21.000Z</updated>
+  <updated>2015-09-17T21:29:44.000Z</updated>
   <id>http://1pixelout.net/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://1pixelout.net/2015/09/16/setting-and-reading-cookies-when-using-rack-test/"/>
     <id>http://1pixelout.net/2015/09/16/setting-and-reading-cookies-when-using-rack-test/</id>
     <published>2015-09-16T10:25:10.000Z</published>
-    <updated>2015-09-17T20:02:21.000Z</updated>
+    <updated>2015-09-17T21:29:44.000Z</updated>
     <content type="html"><![CDATA[<p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
 <h2 id="To_set_a_cookie_with_an_expiry_date">To set a cookie with an expiry date</h2><p>For example, to set the expiry date 30 days in the future:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_cookie <span class="string">"name=value; expires=<span class="subst">#&#123;<span class="constant">Time</span>.now + <span class="number">30</span>.days&#125;</span>"</span></span><br></pre></td></tr></table></figure>
