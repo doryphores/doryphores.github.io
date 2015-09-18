@@ -52,6 +52,9 @@ code {
   font-family: "Roboto Mono";
   font-weight: normal;
   font-size: 14px;
+  -webkit-text-size-adjust: none;
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
 }
 h1 {
   font-weight: bold;
@@ -209,7 +212,6 @@ pre code,
   background: #3f3f3f;
   border-radius: 2px;
   color: #dcdcdc;
-  -webkit-text-size-adjust: none;
 }
 @media only screen and (max-width: 600px) {
   pre code,

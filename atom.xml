@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1pixelout.net/"/>
-  <updated>2015-09-17T21:29:44.000Z</updated>
+  <updated>2015-09-18T13:31:32.000Z</updated>
   <id>http://1pixelout.net/</id>
   
   <author>
@@ -13,6 +13,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Writing hexo template helpers]]></title>
+    <link href="http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/"/>
+    <id>http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/</id>
+    <published>2015-09-18T13:31:32.000Z</published>
+    <updated>2015-09-18T13:31:32.000Z</updated>
+    <content type="html"><![CDATA[<p>Instead of including JavaScript in your hexo layout templates, it’s better to move it to a collection of helpers that you can define in your theme’s scripts.</p>
+<p>A good example is the logic for setting the page title included in hexo’s default <strong>landscape</strong> theme.</p>
+<p>The following code is present at the top of the theme’s <code>head.ejs</code> partial:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> title = page.title;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (is_archive())&#123;</span><br><span class="line">  title = <span class="string">'Archives'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (is_month())&#123;</span><br><span class="line">    title += <span class="string">': '</span> + page.year + <span class="string">'/'</span> + page.month;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_year())&#123;</span><br><span class="line">    title += <span class="string">': '</span> + page.year;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_category())&#123;</span><br><span class="line">  title = <span class="string">'Category: '</span> + page.category;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_tag())&#123;</span><br><span class="line">  title = <span class="string">'Tag: '</span> + page.tag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>It feels wrong to me to include this in a template. A better solution is to register a <code>page_title</code> helper for the theme. For this, create a new file in the theme’s <code>scripts</code> folder (the docs only mention the site top-level <code>scripts</code> folder but you can also place scripts in the theme’s folder).</p>
+<p>Here’s how you register a new helper called <code>page_title</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">hexo.extend.helper.register(<span class="string">"page_title"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> title = <span class="keyword">this</span>.page.title;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.is_archive()) &#123;</span><br><span class="line">    title = <span class="string">"Archives"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.is_month()) &#123;</span><br><span class="line">    title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year + <span class="string">'/'</span> + <span class="keyword">this</span>.page.month;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_year()) &#123;</span><br><span class="line">      title += <span class="string">": "</span> + <span class="keyword">this</span>.page.year;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_category()) &#123;</span><br><span class="line">    title = <span class="string">"Category: "</span> + <span class="keyword">this</span>.page.category;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_tag()) &#123;</span><br><span class="line">    title = <span class="string">"Tag: "</span> + <span class="keyword">this</span>.page.tag;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> title;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>As you can see, the <code>page</code> object as well as all the other standard hexo objects such as <code>config</code> and <code>site</code> are available through the <code>this</code> scope of the helper.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Instead of including JavaScript in your hexo layout templates, it’s better to move it to a collection of helpers that you can define in y]]>
+    </summary>
+    
+      <category term="hexo" scheme="http://1pixelout.net/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Setting and reading cookies when using Rack::Test]]></title>

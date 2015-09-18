@@ -39,7 +39,7 @@
       <h1 class="article__title" itemprop="name">
   
     
-      <a href="/2015/09/14/prevent-copying-empty-selection-in-atom/">Prevent copying empty selections in Atom</a>
+      <a href="/2015/09/15/git-wip-aliases/">Git WIP aliases</a>
     
   
 </h1>
@@ -47,7 +47,7 @@
       <div class='article__meta'>
         <span class="article__date">
   <span class="u-mobile-hide">Published</span>
-  <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time>
+  <time datetime="2015-09-15T12:39:56.000Z" itemprop="datePublished">Sep 15th 2015</time>
 </span>
 
         <span class="article__author">
@@ -59,7 +59,7 @@
         
   <span class="article__tags">
     Tagged as:
-    <a class="tag-link" href="/tags/atom/">atom</a>
+    <a class="tag-link" href="/tags/git/">git</a>
   </span>
 
 
@@ -67,16 +67,11 @@
     </header>
   
   <div itemprop="articleBody" class="article__body">
-    <p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line. This is an easy mistake to make:</p>
-<ul>
-<li>cut something with <code>Cmd+X</code></li>
-<li>move the cursor to an empty line where I want to paste</li>
-<li>accidently hit <code>Cmd+C</code> instead of <code>Cmd+V</code></li>
-<li>Boom! I have now lost my clipboard contents</li>
-</ul>
-<p>Sublime Text had an option to disable copying empty selections but Atom doesn’t. Fortunately, it’s super easy to hack Atom and someone has figured out how to prevent this. I’m pasting it here so I can easily find it.</p>
-<p>This is <a href="https://discuss.atom.io/t/resolved-avoid-copying-when-selection-is-empty/16397/4" target="_blank" rel="external">the original post</a> on the Atom forum and here’s the snippet to paste in your Atom init script.</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prevent core:copy if and only if there's one selection in</span></span><br><span class="line"><span class="comment"># the active editor (mini or not) and its length equals 0</span></span><br><span class="line">atom.commands.add <span class="string">'atom-text-editor'</span>, <span class="string">'core:copy'</span>, <span class="function"><span class="params">(e)</span> -&gt;</span></span><br><span class="line">  editor = e.currentTarget.getModel()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># do nothing if there's more than 1 selection</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">if</span> editor.getSelectedBufferRanges().length &gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># get the starting and ending points of the selection</span></span><br><span class="line">  &#123;start, end&#125; = editor.getSelectedBufferRange()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># stop the command from immediate propagation (i.e.</span></span><br><span class="line">  <span class="comment"># executing the same command on the same element or</span></span><br><span class="line">  <span class="comment"># an element higher up the DOM tree). This works</span></span><br><span class="line">  <span class="comment"># because atom executes commands in the reverse order</span></span><br><span class="line">  <span class="comment"># they were registered with atom.commands.add, and this</span></span><br><span class="line">  <span class="comment"># one's added after the core commands are already</span></span><br><span class="line">  <span class="comment"># registered.</span></span><br><span class="line">  <span class="keyword">if</span> start.column <span class="keyword">is</span> end.column <span class="keyword">and</span> start.row <span class="keyword">is</span> end.row</span><br><span class="line">    e.stopImmediatePropagation()</span><br></pre></td></tr></table></figure>
+    <p>Just so I can stop looking up how to set these, here are my git command aliases:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[alias]</span></span><br><span class="line"><span class="setting">co = <span class="value">checkout</span></span></span><br><span class="line"><span class="setting">br = <span class="value">branch</span></span></span><br><span class="line"><span class="setting">ci = <span class="value">commit</span></span></span><br><span class="line"><span class="setting">st = <span class="value">status</span></span></span><br><span class="line"><span class="setting">unstage = <span class="value">reset HEAD --</span></span></span><br><span class="line"><span class="setting">fp = <span class="value"><span class="string">"!git fetch -p; git pull"</span></span></span></span><br><span class="line"><span class="setting">wip = <span class="value"><span class="string">"!git add --all; git ci -m WIP"</span></span></span></span><br><span class="line"><span class="setting">unwip = <span class="value"><span class="string">"!git reset --soft HEAD~1; git unstage"</span></span></span></span><br></pre></td></tr></table></figure>
+<p><code>git wip</code> stages all current changes and commits them. Not sure why I prefer it to <code>git stash</code>.</p>
+<p><code>git unwip</code> obviously undoes a <code>git wip</code>.</p>
+
   </div>
   
   
@@ -85,6 +80,10 @@
 
 
 
+
+<nav class="pagination">
+  <a href="/archives" class="pagination__link">Browse posts</a>
+</nav>
 
 </section>
   </div>
