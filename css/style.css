@@ -129,11 +129,17 @@ blockquote p {
   left: -1px;
   right: -1px;
 }
-.site-header__title:hover::before {
+.site-header__title:hover,
+.site-header__title:focus {
+  background-color: #2771b1;
+}
+.site-header__title:hover::before,
+.site-header__title:focus::before {
   left: 0;
   width: 100%;
 }
-.site-header__title:hover::after {
+.site-header__title:hover::after,
+.site-header__title:focus::after {
   top: 0;
   height: 100%;
 }
@@ -214,6 +220,13 @@ pre code,
   color: #dcdcdc;
 }
 @media only screen and (max-width: 600px) {
+  pre code,
+  .highlight {
+    margin: 0 -10px;
+    border-radius: 0;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 800px) {
   pre code,
   .highlight {
     margin: 0 -10px;
@@ -341,12 +354,12 @@ pre code,
   color: #535353;
   text-decoration: none;
 }
-.article__title a:hover {
+.article__title a:hover,
+.article__title a:focus {
   background-color: #eee;
 }
 .article__meta {
   position: relative;
-  display: inline-block;
   padding: 20px 20px 0;
   margin-top: 20px;
   color: #a9a9a9;
@@ -399,6 +412,10 @@ pre code,
 .article__tags a {
   font-weight: bold;
 }
+.article__tags a:hover,
+.article__tags a:focus {
+  color: #2b7ec5;
+}
 .article__body {
   padding-top: 40px;
 }
@@ -417,23 +434,36 @@ pre code,
   background-color: #2b7ec5;
   transition: all 0.2s;
 }
-.article__body a:hover {
+.article__body a:hover,
+.article__body a:focus {
   background-color: #ddd;
 }
-.article__body a:hover::after {
+.article__body a:hover::after,
+.article__body a:focus::after {
   left: 0;
   right: 0;
   height: 2px;
 }
 .archive-list {
   list-style: none;
-  margin: 40px 0 0 0;
+  margin: 0;
   padding: 0;
 }
 .archive-list__item {
   display: block;
   padding: 20px 0;
   border-bottom: 1px dotted #535353;
+  transition: all 0.2s;
+}
+.archive-list__item:hover,
+.archive-list__item:focus {
+  background-color: #f4f9fd;
+}
+@media only screen and (min-width: 801px) {
+  .archive-list__item:hover,
+  .archive-list__item:focus {
+    padding: 20px 10px;
+  }
 }
 .archive-list__title {
   display: inline;
@@ -454,9 +484,14 @@ pre code,
   color: #fff;
   font-size: 14px;
   font-weight: 600;
+  transition: background-color 0.2s;
 }
 .pagination__link + .pagination__link {
   margin-left: 1px;
+}
+.pagination__link:hover,
+.pagination__link:focus {
+  background-color: #22659e;
 }
 .pagination__link--prev::before {
   content: "❮";
