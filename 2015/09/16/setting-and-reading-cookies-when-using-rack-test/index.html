@@ -1,118 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Setting and reading cookies when using Rack::Test | 1 Pixel Out</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="alternative" href="/atom.xml" title="1 Pixel Out" type="application/atom+xml">
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-</head>
-
-<body>
-  <div class="site-wrapper">
-    <header class="site-header">
-  
-    <div class="site-header__title">
-      <a href="/">1 Pixel Out</a>
-    </div>
-  
-  <nav class="site-header__nav">
-    
-      <a href="/">Home</a>
-    
-      <a href="/archives">Archives</a>
-    
-  </nav>
-  <nav class="site-header__tools">
-    
-      <a href="/atom.xml" title="RSS Feed">RSS Feed</a>
-    
-  </nav>
-</header>
-
-    <section><article itemscope itemprop="blogPost" class="article">
-  
-    <header class="o-page-header">
-      <h1 class="o-page-header__title" itemprop="name">
-  
-    
-      Setting and reading cookies when using Rack::Test
-    
-  
-</h1>
-
-      <div class='article__meta'>
-        <span class="article__date">
-  <span class="u-mobile-hide">Published</span>
-  <time datetime="2015-09-16T10:25:10.000Z" itemprop="datePublished">Sep 16th 2015</time>
-</span>
-
-        <span class="article__author">
-  By
-  <strong itemprop="author">Martin Laine</strong>
-</span>
-
-        
-        
-  <span class="article__tags">
-    Tagged as:
-    <a class="tag-link" href="/tags/ruby/">ruby</a>
-  </span>
-
-
-      </div>
-    </header>
-  
-  <div itemprop="articleBody" class="article__body">
-    <p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Setting and reading cookies when using Rack::Test | 1 Pixel Out</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="alternative" href="/atom.xml" title="1 Pixel Out" type="application/atom+xml"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/style.css" type="text/css"></head><body><div class="site-wrapper"><header class="site-header"><div class="site-header__title"><a href="/">1 Pixel Out</a></div><nav class="site-header__nav"><a href="/">Home</a><a href="/archives">Archives</a></nav><nav class="site-header__tools"><a href="/atom.xml" title="RSS Feed">RSS Feed</a></nav></header><section><article itemscope="itemscope" itemprop="blogPost" class="article"><header class="o-page-header"><h1 itemprop="name" class="o-page-header__title">Setting and reading cookies when using Rack::Test</h1><div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span><time datetime="2015-09-16T10:25:10.000Z" itemprop="datePublished">Sep 16th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="article__tags">Tagged as:&nbsp;<a class="tag-link" href="/tags/ruby/">ruby</a></span></div></header><div itemprop="articleBody" class="article__body"><p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
 <h2 id="To_set_a_cookie_with_an_expiry_date">To set a cookie with an expiry date</h2><p>For example, to set the expiry date 30 days in the future:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_cookie <span class="string">"name=value; expires=<span class="subst">#&#123;<span class="constant">Time</span>.now + <span class="number">30</span>.days&#125;</span>"</span></span><br></pre></td></tr></table></figure>
 <h2 id="To_check_expiry_date_of_a_cookie_set_by_the_response">To check expiry date of a cookie set by the response</h2><p>Cookies are set by the response’s <code>Set-Cookie</code> header. To check the <code>expires</code> option, we need to parse the header and create <code>Cookie</code> objects:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cookies_from_response</span><span class="params">(response=last_response)</span></span></span><br><span class="line">  <span class="constant">Hash</span>[response[<span class="string">"Set-Cookie"</span>].lines.map &#123; |line|</span><br><span class="line">    cookie = <span class="constant">Rack::Test::Cookie</span>.new(line.chomp)</span><br><span class="line">    [cookie.name, cookie]</span><br><span class="line">  &#125;]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>So now we can do something like:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cookie = cookies_from_response[<span class="string">"cookie_name"</span>]</span><br><span class="line">expect(cookie.expires).to be_within(<span class="number">5</span>.minutes).of(<span class="number">30</span>.days.from_now)</span><br></pre></td></tr></table></figure>
-<p>The <code>be_within</code> matcher is perfect her because we cannot check the exact expiry date.</p>
-
-  </div>
-  
-  
-    
-<nav class="o-pagination">
-  
-    <a href="/2015/09/18/writing-hexo-template-helpers/" class="o-pagination__link  o-pagination__link--prev">
-      Newer
-      <span class="o-pagination__link-title">Writing hexo template helpers</span>
-    </a><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link  o-pagination__link--next">
-      Older
-      <span class="o-pagination__link-title">Git WIP aliases</span>
-    </a>
-  
-</nav>
-
-
-  
-</article>
-
-
-</section>
-  </div>
-  <footer class="site-footer">
-  <span class="site-footer__line">
-    &copy; 2015 Martin Laine
-  </span>
-  <span class="site-footer__line">
-    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    and <a href="https:/github.com/" target="_blank">GitHub</a>
-  </span>
-  <span class="site-footer__line">
-    Theme inspired by <a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
-    from <a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a>
-  </span>
-</footer>
-
-  
-</body>
-</html>
+<p>The <code>be_within</code> matcher is perfect here because we cannot check the exact expiry date.</p>
+</div><nav class="o-pagination"><a href="/2015/09/18/writing-hexo-template-helpers/" class="o-pagination__link o-pagination__link--prev">Newer
+<span class="o-pagination__link-title">Writing hexo template helpers</span></a><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--next">Older
+<span class="o-pagination__link-title">Git WIP aliases</span></a></nav></article></section></div><footer class="site-footer"><span class="site-footer__line">&copy; 2015 Martin Laine</span><span class="site-footer__line">Powered by
+<a href="http://hexo.io/" target="_blank">Hexo</a>
+and
+<a href="https:/github.com/" target="_blank">GitHub</a></span><span class="site-footer__line">Theme inspired by
+<a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
+from
+<a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a></span></footer></body></html>
