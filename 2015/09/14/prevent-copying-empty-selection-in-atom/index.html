@@ -1,4 +1,28 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Prevent copying empty selections in Atom | 1 Pixel Out</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="alternative" title="1 Pixel Out" type="application/atom+xml"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/style.css" type="text/css"></head><body><div class="site-wrapper"><header class="site-header"><div class="site-header__title"><a href="/">1 Pixel Out</a></div><nav class="site-nav"><a href="/" class="site-nav__link">Latest post</a><a href="/archives" class="site-nav__link">Browse posts</a><a href="/about" class="site-nav__link">About</a><a href="/atom.xml" title="RSS Feed" class="site-nav__link">RSS Feed</a></nav></header><section><article itemscope="itemscope" itemprop="blogPost" class="article"><header class="o-page-header"><h1 itemprop="name" class="o-page-header__title">Prevent copying empty selections in Atom</h1><div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="article__tags">Tagged as:&nbsp;<a class="tag-link" href="/tags/atom/">atom</a></span></div></header><div itemprop="articleBody" class="article__body"><p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Prevent copying empty selections in Atom | 1 Pixel Out</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="alternative" title="1 Pixel Out" type="application/atom+xml">
+    <link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/style.css" type="text/css">
+  </head>
+  <body>
+    <div class="site-wrapper">
+<header class="site-header">
+  <div class="site-header__title"><a href="/">1 Pixel Out</a></div>
+  <nav class="site-nav"><a href="/" class="site-nav__link">Latest post</a><a href="/archives" class="site-nav__link">Browse posts</a><a href="/about" class="site-nav__link">About</a><a href="/atom.xml" title="RSS Feed" class="site-nav__link">RSS Feed</a></nav>
+</header>
+      <section>
+<article itemscope="itemscope" itemprop="blogPost" class="article">
+  <header class="o-page-header">
+<h1 itemprop="name" class="o-page-header__title">Prevent copying empty selections in Atom
+</h1>
+    <div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> 
+  <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="article__tags">Tagged as:&nbsp;<a class="tag-link" href="/tags/atom/">atom</a></span>
+    </div>
+  </header>
+  <div itemprop="articleBody" class="article__body"><p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.</p>
 <p>This is an easy mistake to make:</p>
 <ul>
 <li>cut something with <code>Cmd+X</code></li>
@@ -9,11 +33,22 @@
 <p>Sublime Text had an option to disable copying empty selections but Atom doesn’t. Fortunately, it’s super easy to hack Atom and someone has figured out how to prevent this. I’m pasting it here so I can easily find it.</p>
 <p>This is <a href="https://discuss.atom.io/t/resolved-avoid-copying-when-selection-is-empty/16397/4" target="_blank" rel="external">the original post</a> on the Atom forum and here’s the snippet to paste in your Atom init script.</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prevent core:copy if and only if there's one selection in</span></span><br><span class="line"><span class="comment"># the active editor (mini or not) and its length equals 0</span></span><br><span class="line">atom.commands.add <span class="string">'atom-text-editor'</span>, <span class="string">'core:copy'</span>, <span class="function"><span class="params">(e)</span> -&gt;</span></span><br><span class="line">  editor = e.currentTarget.getModel()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># do nothing if there's more than 1 selection</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">if</span> editor.getSelectedBufferRanges().length &gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># get the starting and ending points of the selection</span></span><br><span class="line">  &#123;start, end&#125; = editor.getSelectedBufferRange()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># stop the command from immediate propagation (i.e.</span></span><br><span class="line">  <span class="comment"># executing the same command on the same element or</span></span><br><span class="line">  <span class="comment"># an element higher up the DOM tree). This works</span></span><br><span class="line">  <span class="comment"># because atom executes commands in the reverse order</span></span><br><span class="line">  <span class="comment"># they were registered with atom.commands.add, and this</span></span><br><span class="line">  <span class="comment"># one's added after the core commands are already</span></span><br><span class="line">  <span class="comment"># registered.</span></span><br><span class="line">  <span class="keyword">if</span> start.column <span class="keyword">is</span> end.column <span class="keyword">and</span> start.row <span class="keyword">is</span> end.row</span><br><span class="line">    e.stopImmediatePropagation()</span><br></pre></td></tr></table></figure>
-</div><nav class="o-pagination"><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--prev">Newer
-<span class="o-pagination__link-title">Git WIP aliases</span></a></nav></article></section></div><footer class="site-footer"><span class="site-footer__line">&copy; 2015 Martin Laine</span><span class="site-footer__line">Powered by
-<a href="http://hexo.io/" target="_blank">Hexo</a>
-and
-<a href="https:/github.com/" target="_blank">GitHub</a></span><span class="site-footer__line">Theme inspired by
-<a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
-from
-<a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a></span></footer></body></html>
+
+  </div>
+<nav class="o-pagination"><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--prev">
+    Newer
+    <span class="o-pagination__link-title">Git WIP aliases</span></a>
+</nav>
+</article></section>
+    </div>
+<footer class="site-footer"><span class="site-footer__line">&copy; 2015 Martin Laine</span><span class="site-footer__line">
+    Powered by
+    <a href="http://hexo.io/" target="_blank">Hexo</a>
+    and
+    <a href="https:/github.com/" target="_blank">GitHub</a></span><span class="site-footer__line">
+    Theme inspired by
+    <a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
+    from
+    <a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a></span></footer>
+  </body>
+</html>

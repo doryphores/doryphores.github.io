@@ -1,4 +1,28 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>1 Pixel Out</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="alternative" title="1 Pixel Out" type="application/atom+xml"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/style.css" type="text/css"></head><body><div class="site-wrapper"><header class="site-header"><h1 class="site-header__title"><a href="/">1 Pixel Out</a></h1><nav class="site-nav"><a href="/" class="site-nav__link site-nav__link--current">Latest post</a><a href="/archives" class="site-nav__link">Browse posts</a><a href="/about" class="site-nav__link">About</a><a href="/atom.xml" title="RSS Feed" class="site-nav__link">RSS Feed</a></nav></header><section><article itemscope="itemscope" itemprop="blogPost" class="article"><header class="o-page-header"><h1 itemprop="name" class="o-page-header__title"><a href="/2015/09/18/writing-hexo-template-helpers/">Writing hexo template helpers</a></h1><div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> <time datetime="2015-09-18T13:31:32.000Z" itemprop="datePublished">Sep 18th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="article__tags">Tagged as:&nbsp;<a class="tag-link" href="/tags/hexo/">hexo</a></span></div></header><div itemprop="articleBody" class="article__body"><p>Instead of including JavaScript in your hexo layout templates, it’s better to move it to a collection of helpers that you can define in your theme’s scripts.</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>1 Pixel Out</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="alternative" title="1 Pixel Out" type="application/atom+xml">
+    <link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/style.css" type="text/css">
+  </head>
+  <body>
+    <div class="site-wrapper">
+<header class="site-header">
+  <h1 class="site-header__title"><a href="/">1 Pixel Out</a></h1>
+  <nav class="site-nav"><a href="/" class="site-nav__link site-nav__link--current">Latest post</a><a href="/archives" class="site-nav__link">Browse posts</a><a href="/about" class="site-nav__link">About</a><a href="/atom.xml" title="RSS Feed" class="site-nav__link">RSS Feed</a></nav>
+</header>
+      <section>
+<article itemscope="itemscope" itemprop="blogPost" class="article">
+  <header class="o-page-header">
+<h1 itemprop="name" class="o-page-header__title"><a href="/2015/09/18/writing-hexo-template-helpers/">Writing hexo template helpers</a>
+</h1>
+    <div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> 
+  <time datetime="2015-09-18T13:31:32.000Z" itemprop="datePublished">Sep 18th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="article__tags">Tagged as:&nbsp;<a class="tag-link" href="/tags/hexo/">hexo</a></span>
+    </div>
+  </header>
+  <div itemprop="articleBody" class="article__body"><p>Instead of including JavaScript in your hexo layout templates, it’s better to move it to a collection of helpers that you can define in your theme’s scripts.</p>
 <p>A good example is the logic for setting the page title included in hexo’s default <strong>landscape</strong> theme.</p>
 <p>The following code is present at the top of the theme’s <code>head.ejs</code> partial:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> title = page.title;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (is_archive())&#123;</span><br><span class="line">  title = <span class="string">'Archives'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (is_month())&#123;</span><br><span class="line">    title += <span class="string">': '</span> + page.year + <span class="string">'/'</span> + page.month;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_year())&#123;</span><br><span class="line">    title += <span class="string">': '</span> + page.year;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_category())&#123;</span><br><span class="line">  title = <span class="string">'Category: '</span> + page.category;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_tag())&#123;</span><br><span class="line">  title = <span class="string">'Tag: '</span> + page.tag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -6,10 +30,19 @@
 <p>Here’s how you register a new helper called <code>page_title</code>:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">hexo.extend.helper.register(<span class="string">"page_title"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> title = <span class="keyword">this</span>.page.title;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.is_archive()) &#123;</span><br><span class="line">    title = <span class="string">"Archives"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.is_month()) &#123;</span><br><span class="line">    title += <span class="string">': '</span> + <span class="keyword">this</span>.page.year + <span class="string">'/'</span> + <span class="keyword">this</span>.page.month;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_year()) &#123;</span><br><span class="line">      title += <span class="string">": "</span> + <span class="keyword">this</span>.page.year;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_category()) &#123;</span><br><span class="line">    title = <span class="string">"Category: "</span> + <span class="keyword">this</span>.page.category;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.is_tag()) &#123;</span><br><span class="line">    title = <span class="string">"Tag: "</span> + <span class="keyword">this</span>.page.tag;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> title;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>As you can see, the <code>page</code> object as well as all the other standard hexo objects such as <code>config</code> and <code>site</code> are available through the <code>this</code> scope of the helper.</p>
-</div></article><nav class="o-pagination"><a href="/archives" class="o-pagination__link">Browse posts</a></nav></section></div><footer class="site-footer"><span class="site-footer__line">&copy; 2015 Martin Laine</span><span class="site-footer__line">Powered by
-<a href="http://hexo.io/" target="_blank">Hexo</a>
-and
-<a href="https:/github.com/" target="_blank">GitHub</a></span><span class="site-footer__line">Theme inspired by
-<a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
-from
-<a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a></span></footer></body></html>
+
+  </div>
+</article>
+<nav class="o-pagination"><a href="/archives" class="o-pagination__link">Browse posts</a></nav></section>
+    </div>
+<footer class="site-footer"><span class="site-footer__line">&copy; 2015 Martin Laine</span><span class="site-footer__line">
+    Powered by
+    <a href="http://hexo.io/" target="_blank">Hexo</a>
+    and
+    <a href="https:/github.com/" target="_blank">GitHub</a></span><span class="site-footer__line">
+    Theme inspired by
+    <a href="http://ghost.jollygoodthemes.com/ghostwriter/" target="_blank">Ghostwriter</a>
+    from
+    <a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a></span></footer>
+  </body>
+</html>
