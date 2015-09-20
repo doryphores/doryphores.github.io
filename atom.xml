@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1pixelout.net/"/>
-  <updated>2015-09-18T14:13:36.000Z</updated>
+  <updated>2015-09-20T14:07:09.000Z</updated>
   <id>http://1pixelout.net/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/"/>
     <id>http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/</id>
     <published>2015-09-18T13:31:32.000Z</published>
-    <updated>2015-09-18T14:13:36.000Z</updated>
+    <updated>2015-09-20T14:07:09.000Z</updated>
     <content type="html"><![CDATA[<p>Instead of including JavaScript in your hexo layout templates, it’s better to move it to a collection of helpers that you can define in your theme’s scripts.</p>
 <p>A good example is the logic for setting the page title included in hexo’s default <strong>landscape</strong> theme.</p>
 <p>The following code is present at the top of the theme’s <code>head.ejs</code> partial:</p>
@@ -30,7 +30,8 @@
 <p>As you can see, the <code>page</code> object as well as all the other standard hexo objects such as <code>config</code> and <code>site</code> are available through the <code>this</code> scope of the helper.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Instead of including JavaScript in your hexo layout templates, it’s better to move it to a collection of helpers that you can define in y]]>
+    <![CDATA[How to define and include helpers with your Hexo theme]]>
+    
     </summary>
     
       <category term="hexo" scheme="http://1pixelout.net/tags/hexo/"/>
@@ -42,7 +43,7 @@
     <link href="http://1pixelout.net/2015/09/16/setting-and-reading-cookies-when-using-rack-test/"/>
     <id>http://1pixelout.net/2015/09/16/setting-and-reading-cookies-when-using-rack-test/</id>
     <published>2015-09-16T10:25:10.000Z</published>
-    <updated>2015-09-18T20:31:13.000Z</updated>
+    <updated>2015-09-20T14:00:46.000Z</updated>
     <content type="html"><![CDATA[<p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
 <h2 id="To_set_a_cookie_with_an_expiry_date">To set a cookie with an expiry date</h2><p>For example, to set the expiry date 30 days in the future:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_cookie <span class="string">"name=value; expires=<span class="subst">#&#123;<span class="constant">Time</span>.now + <span class="number">30</span>.days&#125;</span>"</span></span><br></pre></td></tr></table></figure>
@@ -53,7 +54,8 @@
 <p>The <code>be_within</code> matcher is perfect here because we cannot check the exact expiry date.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="e]]>
+    <![CDATA[How to set and read cookies when writing specs and features with Rack::Test]]>
+    
     </summary>
     
       <category term="ruby" scheme="http://1pixelout.net/tags/ruby/"/>
@@ -85,7 +87,7 @@
     <link href="http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/"/>
     <id>http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/</id>
     <published>2015-09-14T20:29:06.000Z</published>
-    <updated>2015-09-18T20:32:36.000Z</updated>
+    <updated>2015-09-20T13:59:59.000Z</updated>
     <content type="html"><![CDATA[<p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.</p>
 <p>This is an easy mistake to make:</p>
 <ul>
@@ -99,8 +101,8 @@
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prevent core:copy if and only if there's one selection in</span></span><br><span class="line"><span class="comment"># the active editor (mini or not) and its length equals 0</span></span><br><span class="line">atom.commands.add <span class="string">'atom-text-editor'</span>, <span class="string">'core:copy'</span>, <span class="function"><span class="params">(e)</span> -&gt;</span></span><br><span class="line">  editor = e.currentTarget.getModel()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># do nothing if there's more than 1 selection</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">if</span> editor.getSelectedBufferRanges().length &gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># get the starting and ending points of the selection</span></span><br><span class="line">  &#123;start, end&#125; = editor.getSelectedBufferRange()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># stop the command from immediate propagation (i.e.</span></span><br><span class="line">  <span class="comment"># executing the same command on the same element or</span></span><br><span class="line">  <span class="comment"># an element higher up the DOM tree). This works</span></span><br><span class="line">  <span class="comment"># because atom executes commands in the reverse order</span></span><br><span class="line">  <span class="comment"># they were registered with atom.commands.add, and this</span></span><br><span class="line">  <span class="comment"># one's added after the core commands are already</span></span><br><span class="line">  <span class="comment"># registered.</span></span><br><span class="line">  <span class="keyword">if</span> start.column <span class="keyword">is</span> end.column <span class="keyword">and</span> start.row <span class="keyword">is</span> end.row</span><br><span class="line">    e.stopImmediatePropagation()</span><br></pre></td></tr></table></figure>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.</p>
-<p>This is an easy mistake to make:</]]>
+    <![CDATA[How to prevent copying an empty selection in Atom]]>
+    
     </summary>
     
       <category term="atom" scheme="http://1pixelout.net/tags/atom/"/>
