@@ -20,7 +20,7 @@
   <body>
     <div class="site-wrapper">
 <header class="c-site-header">
-  <div class="c-site-header__branding"><a href="/">1 Pixel Out</a></div><a href="/atom.xml" title="RSS Feed" class="c-site-header__rss-link"><i class="octicon octicon-rss"></i></a>
+  <div class="c-site-header__branding"><a href="/">1 Pixel Out</a></div><a href="/atom.xml" title="RSS Feed" class="c-site-header__rss-link"><i class="icon-rss"></i></a>
   <nav class="c-site-nav">
     <ul class="u-list--horizontal">
       <li class="c-site-nav__item"><a href="/">Latest post</a></li>
@@ -37,6 +37,7 @@
     <div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> 
 <time datetime="2015-09-15T12:39:56.000Z" itemprop="datePublished">Sep 15th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="o-tag-list">Tagged as:&nbsp;<a href="/tags/git/" class="o-tag-list__item">git</a></span>
     </div>
+    <div class="article__sharing"><a href="http://twitter.com/share?text=Git%20WIP%20aliases&amp;url=http%3A%2F%2F1pixelout.net%2F2015%2F09%2F15%2Fgit-wip-aliases%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;" title="Post to Twitter"><span class="u-mobile-hide">Share on Twitter</span><i class="icon-twitter"></i></a></div>
   </header>
   <div itemprop="articleBody" class="article__body"><p>Just so I can stop looking up how to set these, here are my git command aliases:</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[alias]</span></span><br><span class="line"><span class="setting">co = <span class="value">checkout</span></span></span><br><span class="line"><span class="setting">br = <span class="value">branch</span></span></span><br><span class="line"><span class="setting">ci = <span class="value">commit</span></span></span><br><span class="line"><span class="setting">st = <span class="value">status</span></span></span><br><span class="line"><span class="setting">unstage = <span class="value">reset HEAD --</span></span></span><br><span class="line"><span class="setting">fp = <span class="value"><span class="string">"!git fetch -p; git pull"</span></span></span></span><br><span class="line"><span class="setting">wip = <span class="value"><span class="string">"!git add --all; git ci -m WIP"</span></span></span></span><br><span class="line"><span class="setting">unwip = <span class="value"><span class="string">"!git reset --soft HEAD~1; git unstage"</span></span></span></span><br></pre></td></tr></table></figure>
@@ -45,20 +46,14 @@
 
   </div>
 </article>
-<nav class="o-pagination"><a href="/2015/09/16/setting-and-reading-cookies-when-using-rack-test/" class="o-pagination__link o-pagination__link--prev">
-    Newer
-    <span class="o-pagination__link-title">Setting and reading cookies when using Rack::Test</span></a><a href="/2015/09/14/prevent-copying-empty-selection-in-atom/" class="o-pagination__link o-pagination__link--next">
-    Older
-    <span class="o-pagination__link-title">Prevent copying empty selections in Atom</span></a>
+<nav class="o-pagination"><a href="/2015/09/16/setting-and-reading-cookies-when-using-rack-test/" class="o-pagination__link o-pagination__link--prev"><i class="o-pagination__link-icon icon-left"></i><span class="o-pagination__link-label">Newer</span><span class="o-pagination__link-title">Setting and reading cookies when using Rack::Test</span></a><a href="/2015/09/14/prevent-copying-empty-selection-in-atom/" class="o-pagination__link o-pagination__link--next"><span class="o-pagination__link-label">Older</span><i class="o-pagination__link-icon icon-right"></i><span class="o-pagination__link-title">Prevent copying empty selections in Atom</span></a>
 </nav>
-<section>
-  <div id="disqus_thread">
-    <noscript>
-      Please enable JavaScript to view the
-      <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.
-    </noscript>
-  </div>
-</section>
+<div id="disqus_thread" class="o-comment-thread">
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+</div>
 <script>
   var disqus_shortname = "1pixelout";
   var disqus_title = "Git WIP aliases";

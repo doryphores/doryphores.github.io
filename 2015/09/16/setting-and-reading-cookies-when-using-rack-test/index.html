@@ -21,7 +21,7 @@
   <body>
     <div class="site-wrapper">
 <header class="c-site-header">
-  <div class="c-site-header__branding"><a href="/">1 Pixel Out</a></div><a href="/atom.xml" title="RSS Feed" class="c-site-header__rss-link"><i class="octicon octicon-rss"></i></a>
+  <div class="c-site-header__branding"><a href="/">1 Pixel Out</a></div><a href="/atom.xml" title="RSS Feed" class="c-site-header__rss-link"><i class="icon-rss"></i></a>
   <nav class="c-site-nav">
     <ul class="u-list--horizontal">
       <li class="c-site-nav__item"><a href="/">Latest post</a></li>
@@ -38,6 +38,7 @@
     <div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> 
 <time datetime="2015-09-16T10:25:10.000Z" itemprop="datePublished">Sep 16th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="o-tag-list">Tagged as:&nbsp;<a href="/tags/ruby/" class="o-tag-list__item">ruby</a></span>
     </div>
+    <div class="article__sharing"><a href="http://twitter.com/share?text=Setting%20and%20reading%20cookies%20when%20using%20Rack%3A%3ATest&amp;url=http%3A%2F%2F1pixelout.net%2F2015%2F09%2F16%2Fsetting-and-reading-cookies-when-using-rack-test%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;" title="Post to Twitter"><span class="u-mobile-hide">Share on Twitter</span><i class="icon-twitter"></i></a></div>
   </header>
   <div itemprop="articleBody" class="article__body"><p>I used the following for testing a <a href="www.sinatrarb.com/">sinatra</a> app using <a href="http://rspec.info/" target="_blank" rel="external">rspec</a> and <a href="https://github.com/jnicklas/turnip" target="_blank" rel="external">turnip</a>. I needed to write a feature to test that a particular request was setting a cookie with an expiry date and that it would behave correctly when a cookie was already present in the browser.</p>
 <h2 id="To_set_a_cookie_with_an_expiry_date">To set a cookie with an expiry date</h2><p>For example, to set the expiry date 30 days in the future:</p>
@@ -50,20 +51,14 @@
 
   </div>
 </article>
-<nav class="o-pagination"><a href="/2015/09/18/writing-hexo-template-helpers/" class="o-pagination__link o-pagination__link--prev">
-    Newer
-    <span class="o-pagination__link-title">Writing hexo template helpers</span></a><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--next">
-    Older
-    <span class="o-pagination__link-title">Git WIP aliases</span></a>
+<nav class="o-pagination"><a href="/2015/09/18/writing-hexo-template-helpers/" class="o-pagination__link o-pagination__link--prev"><i class="o-pagination__link-icon icon-left"></i><span class="o-pagination__link-label">Newer</span><span class="o-pagination__link-title">Writing hexo template helpers</span></a><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--next"><span class="o-pagination__link-label">Older</span><i class="o-pagination__link-icon icon-right"></i><span class="o-pagination__link-title">Git WIP aliases</span></a>
 </nav>
-<section>
-  <div id="disqus_thread">
-    <noscript>
-      Please enable JavaScript to view the
-      <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.
-    </noscript>
-  </div>
-</section>
+<div id="disqus_thread" class="o-comment-thread">
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+</div>
 <script>
   var disqus_shortname = "1pixelout";
   var disqus_title = "Setting and reading cookies when using Rack::Test";
