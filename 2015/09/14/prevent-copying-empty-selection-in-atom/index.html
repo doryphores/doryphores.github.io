@@ -38,7 +38,6 @@
     <div class="article__meta"><span class="article__date"><span class="u-mobile-hide">Published</span> 
 <time datetime="2015-09-14T20:29:06.000Z" itemprop="datePublished">Sep 14th 2015</time></span><span class="article__author">By <strong itemprop="author">Martin Laine</strong></span><span class="o-tag-list">Tagged as:&nbsp;<a href="/tags/atom/" class="o-tag-list__item">atom</a></span>
     </div>
-    <div class="article__sharing"><a href="http://twitter.com/share?text=Prevent%20copying%20empty%20selections%20in%20Atom&amp;url=http%3A%2F%2F1pixelout.net%2F2015%2F09%2F14%2Fprevent-copying-empty-selection-in-atom%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;" title="Post to Twitter"><span class="u-mobile-hide">Share on Twitter</span><i class="icon-twitter"></i></a></div>
   </header>
   <div itemprop="articleBody" class="article__body"><p>I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.</p>
 <p>This is an easy mistake to make:</p>
@@ -54,24 +53,21 @@
 
   </div>
 </article>
-<nav class="o-pagination"><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--prev"><i class="o-pagination__link-icon icon-left"></i><span class="o-pagination__link-label">Newer</span><span class="o-pagination__link-title">Git WIP aliases</span></a>
+<nav class="o-pagination">
+  <div class="o-pagination__social"><a href="http://twitter.com/share?text=Prevent%20copying%20empty%20selections%20in%20Atom&amp;url=http%3A%2F%2F1pixelout.net%2F2015%2F09%2F14%2Fprevent-copying-empty-selection-in-atom%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;" title="Post to Twitter" class="o-pagination__link"><i class="o-pagination__link-icon icon-twitter"></i><span class="u-mobile-hide">Post to Twitter</span></a><a id="js-toggle-comments" href="#disqus_thread" class="o-pagination__link"><i class="o-pagination__link-icon icon-comments"></i><span class="u-mobile-hide">Comments<span data-disqus-url="http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/" class="o-pagination__link-count disqus-comment-count"></span></span></a></div><a href="/2015/09/15/git-wip-aliases/" class="o-pagination__link o-pagination__link--prev"><i class="o-pagination__link-icon icon-left"></i><span class="o-pagination__link-label">Newer</span><span class="o-pagination__link-title">Git WIP aliases</span></a>
 </nav>
-<div id="disqus_thread" class="o-comment-thread">
-  <noscript>
-    Please enable JavaScript to view the
-    <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.
-  </noscript>
+<div id="js-comment-box" tabindex="-1" class="o-comment-box">
+  <div id="disqus_thread" class="o-comment-box__thread">
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.
+    </noscript>
+  </div>
 </div>
 <script>
   var disqus_shortname = "1pixelout";
   var disqus_title = "Prevent copying empty selections in Atom";
   var disqus_url = "http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/";
-  
-  (function() {
-   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
 </script></section>
     </div>
 <footer class="c-site-footer">
@@ -89,5 +85,6 @@
     <a href="http://ghost.jollygoodthemes.com/" target="_blank">JollyGoodThemes</a>
   </p>
 </footer>
+    <script src="/js/app.js"></script>
   </body>
 </html>
