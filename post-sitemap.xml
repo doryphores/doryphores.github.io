@@ -7,6 +7,13 @@
     </url>
 
     <url>
+        <loc>http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/</loc>
+        <lastmod>2015-10-04T10:28:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
         <loc>http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/</loc>
         <lastmod>2015-10-04T09:53:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -30,13 +37,6 @@
     <url>
         <loc>http://1pixelout.net/2015/09/16/setting-and-reading-cookies-when-using-rack-test/</loc>
         <lastmod>2015-09-22T09:21:06.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/</loc>
-        <lastmod>2015-09-20T14:07:09.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
