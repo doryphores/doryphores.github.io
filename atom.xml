@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1pixelout.net/"/>
-  <updated>2015-10-02T13:11:41.000Z</updated>
+  <updated>2015-10-04T08:48:12.000Z</updated>
   <id>http://1pixelout.net/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://1pixelout.net/2015/10/02/simple-breakpoint-media-queries-with-stylus/"/>
     <id>http://1pixelout.net/2015/10/02/simple-breakpoint-media-queries-with-stylus/</id>
     <published>2015-10-02T13:11:41.000Z</published>
-    <updated>2015-10-02T13:11:41.000Z</updated>
+    <updated>2015-10-04T08:48:12.000Z</updated>
     <content type="html">&lt;p&gt;One of the first things I do when I start a new CSS project, is define a helper for simplifying media queries. For example, with SASS, I like to be able to do something like this:&lt;/p&gt;
 &lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;.site-wrapper&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;max-width&lt;/span&gt;&lt;span class=&quot;value&quot;&gt;: &lt;span class=&quot;number&quot;&gt;800px&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;value&quot;&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; auto;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt; for_breakpoint&lt;/span&gt;(tablet&lt;span class=&quot;preprocessor&quot;&gt; mobile&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;value&quot;&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;10px&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;The &lt;code&gt;for_breakpoint&lt;/code&gt; mixin would wrap its contents in a media query built from previously defined breakpoints.&lt;/p&gt;
@@ -177,7 +177,7 @@
     <link href="http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/"/>
     <id>http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/</id>
     <published>2015-09-14T20:29:06.000Z</published>
-    <updated>2015-09-20T13:59:59.000Z</updated>
+    <updated>2015-10-04T09:53:02.000Z</updated>
     <content type="html">&lt;p&gt;I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.&lt;/p&gt;
 &lt;p&gt;This is an easy mistake to make:&lt;/p&gt;
 &lt;ul&gt;
@@ -192,7 +192,7 @@
 </content>
     <summary type="html">
     
-      How to prevent copying an empty selection in Atom
+      Overwriting the clipboard accidentally by copying an empty line is annoying. Here&#39;s how to prevent it in Atom.
     
     </summary>
     
