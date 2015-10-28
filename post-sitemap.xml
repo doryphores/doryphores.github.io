@@ -7,6 +7,20 @@
     </url>
 
     <url>
+        <loc>http://1pixelout.net/2015/09/29/functional-tests-for-a-hexo-generated-site/</loc>
+        <lastmod>2015-10-28T14:35:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/</loc>
+        <lastmod>2015-10-05T00:10:09.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
         <loc>http://1pixelout.net/2015/09/18/writing-hexo-template-helpers/</loc>
         <lastmod>2015-10-04T14:47:07.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -14,22 +28,8 @@
     </url>
 
     <url>
-        <loc>http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/</loc>
-        <lastmod>2015-10-04T09:53:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
         <loc>http://1pixelout.net/2015/10/02/simple-breakpoint-media-queries-with-stylus/</loc>
         <lastmod>2015-10-04T08:48:12.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>http://1pixelout.net/2015/09/29/functional-tests-for-a-hexo-generated-site/</loc>
-        <lastmod>2015-09-29T13:18:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>

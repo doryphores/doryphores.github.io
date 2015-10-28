@@ -57,13 +57,13 @@
     <link href="http://1pixelout.net/2015/09/29/functional-tests-for-a-hexo-generated-site/"/>
     <id>http://1pixelout.net/2015/09/29/functional-tests-for-a-hexo-generated-site/</id>
     <published>2015-09-29T13:18:24.000Z</published>
-    <updated>2015-09-29T13:18:37.000Z</updated>
+    <updated>2015-10-28T14:35:00.000Z</updated>
     <content type="html">&lt;p&gt;This is just a quick overview of how to write functional tests for a Hexo site.&lt;/p&gt;
 &lt;p&gt;We will use:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/cucumber/cucumber-js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;cucumber.js&lt;/a&gt; for running the features&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://zombie.js.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;zombie.js&lt;/a&gt; as a headless browser&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;coffeescript.org/&quot;&gt;CoffeeScript&lt;/a&gt; to write the step definitions&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://coffeescript.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CoffeeScript&lt;/a&gt; to write the step definitions&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;: The latest version of zombie.js only runs on iojs so if you you want to stick to node, pin it to version 3.x.&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&quot;The_feature&quot;&gt;The feature&lt;/h2&gt;&lt;p&gt;Let’s start with the following feature. It tests that the home page shows the latest article. It does this by visiting the home page, asserting that there is a single article on the page, clicking its title and checking that the article page does not have a “Newer post” link (i.e. it is the latest).&lt;/p&gt;
@@ -179,7 +179,7 @@
     <link href="http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/"/>
     <id>http://1pixelout.net/2015/09/14/prevent-copying-empty-selection-in-atom/</id>
     <published>2015-09-14T20:29:06.000Z</published>
-    <updated>2015-10-04T09:53:02.000Z</updated>
+    <updated>2015-10-05T00:10:09.000Z</updated>
     <content type="html">&lt;p&gt;I really can’t do with an editor that clears my clipboard when I accidently copy an empty line.&lt;/p&gt;
 &lt;p&gt;This is an easy mistake to make:&lt;/p&gt;
 &lt;ul&gt;
